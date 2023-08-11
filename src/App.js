@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Counter from "./components/Counter";
+import { useSelector, useDispatch } from "react-redux";
+import Button from "./components/Button";
+import { reset } from "./redux/slices/counterSlice";
 
 function App() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <span>App: {count}</span>
+
+      <Button
+        text="Reset Counter"
+        onClick={() => {
+          dispatch(reset());
+        }}
+      />
+
+      <Counter />
     </div>
   );
 }
